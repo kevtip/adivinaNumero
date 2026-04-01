@@ -207,10 +207,8 @@ function reiniciarJuego() {
   console.log('Nuevo número secreto:', numeroSecreto);
 }
 
-
 // 8. EVENTOS
 // Aquí conectamos botones y teclado con las funciones.
-
 // Cuando el usuario haga clic en el botón, se ejecuta verificarIntento
 btnAdivinar.addEventListener('click', verificarIntento);
 

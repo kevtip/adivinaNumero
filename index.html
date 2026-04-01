@@ -1,253 +1,255 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <!-- Hace que la página se adapte bien a celulares y tablets -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Hace que la página se adapte bien a celulares y tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Título que aparecerá en la pestaña del navegador -->
-  <title>Adivina el Número - Kevin Leon</title>
+    <!-- Título que aparecerá en la pestaña del navegador -->
+    <title>Adivina el Número - Kevin Leon</title>
 
-  <style>
-    /* 
-      El selector * aplica a todos los elementos.
-      Quitamos márgenes y rellenos por defecto y activamos box-sizing
-      para que los tamaños sean más fáciles de controlar.
+    <style>
+      /* 
+         Quitamos márgenes y rellenos por defecto y activamos box-sizing para que los tamaños sean más fáciles de controlar.
     */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    /* 
+      /* 
       Estilos generales del body:
-      - Fuente amigable tipo caricatura
-      - Centrado horizontal y vertical
-      - Fondo colorido estilo cartoon
+      - Fuente amigable tipo caricatura, centrado horizontal y vertical, fondo colorido
     */
 
-    body {
-      font-family: 'Trebuchet MS', 'Comic Sans MS', Arial, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      background: linear-gradient(135deg, #7bdff2, #b2f7ef, #ffeaa7, #ffb3c6);
-    }
+      body {
+        font-family: "Trebuchet MS", "Comic Sans MS", Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: linear-gradient(135deg, #7bdff2, #b2f7ef, #ffeaa7, #ffb3c6);
+      }
 
-    /* 
+      /* 
       Tarjeta principal del juego.
       Aquí va todo el contenido visible.
     */
-    .game-card {
-      width: 100%;
-      max-width: 460px;
-      background: #ffffff;
-      border: 5px solid #222;
-      border-radius: 30px;
-      padding: 35px 25px;
-      text-align: center;
-      box-shadow: 8px 8px 0 #222;
-    }
+      .game-card {
+        width: 100%;
+        max-width: 460px;
+        background: #ffffff;
+        border: 5px solid #222;
+        border-radius: 30px;
+        padding: 35px 25px;
+        text-align: center;
+        box-shadow: 8px 8px 0 #222;
+      }
 
-    /* Título principal del juego */
-    h1 {
-      font-size: 2rem;
-      color: #ff4d6d;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 0 #ffd60a;
-    }
+      /* Título principal del juego */
+      h1 {
+        font-size: 2rem;
+        color: #ff4d6d;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 0 #ffd60a;
+      }
 
-    /* Texto de apoyo debajo del título */
-    .subtitle {
-      color: #444;
-      font-size: 1rem;
-      margin-bottom: 22px;
-    }
+      /* Texto de apoyo debajo del título */
+      .subtitle {
+        color: #444;
+        font-size: 1rem;
+        margin-bottom: 22px;
+      }
 
-    /* 
+      /* 
       Agrupa el input y los botones.
       Se usa flex para que estén ordenados y con espacio entre ellos.
     */
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    /* Caja donde el usuario escribe su número */
-    input {
-      width: 120px;
-      padding: 12px;
-      font-size: 18px;
-      text-align: center;
-      border: 3px solid #222;
-      border-radius: 15px;
-      outline: none;
-      background: #fff8cc;
-      color: #222;
-    }
-
-    /* Efecto al hacer clic dentro del input */
-    input:focus {
-      background: #fff3a3;
-      transform: scale(1.03);
-    }
-
-    /* Oculta flechas del input numérico en navegadores webkit */
-    input::-webkit-inner-spin-button,
-    input::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-    }
-
-    /* Oculta flechas del input numérico en Firefox */
-    input[type=number] {
-      -moz-appearance: textfield;
-    }
-
-    /* Estilo general de los botones */
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      border: 3px solid #222;
-      border-radius: 15px;
-      cursor: pointer;
-      background: #ffd60a;
-      color: #222;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    /* Efecto al pasar el mouse */
-    button:hover {
-      transform: translateY(-2px);
-      background: #ffcc00;
-    }
-
-    /* Efecto al hacer clic */
-    button:active {
-      transform: translateY(1px);
-    }
-
-    /* Botón desactivado */
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* Zona donde aparece el mensaje principal */
-    #mensaje {
-      min-height: 40px;
-      font-size: 22px;
-      font-weight: bold;
-      margin: 20px 0 10px;
-    }
-
-    /* Contador de intentos */
-    #contador {
-      font-size: 16px;
-      color: #333;
-      margin-bottom: 15px;
-    }
-
-    /* Contenedor del historial de intentos */
-    .historial {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      min-height: 35px;
-      margin-top: 10px;
-    }
-
-    /* Pastillas visuales para cada intento */
-    .guess-pill {
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: bold;
-      border: 2px solid #222;
-    }
-
-    /* Botón de reinicio con otro color para diferenciarlo */
-    #btnReiniciar {
-      margin-top: 18px;
-      background: #90e0ef;
-      display: none;
-    }
-
-    /* Adaptación para pantallas pequeñas */
-    @media (max-width: 480px) {
-      .game-card {
-        padding: 28px 18px;
-      }
-
       .controls {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
       }
 
-      input,
+      /* Caja donde el usuario escribe su número */
+      input {
+        width: 120px;
+        padding: 12px;
+        font-size: 18px;
+        text-align: center;
+        border: 3px solid #222;
+        border-radius: 15px;
+        outline: none;
+        background: #fff8cc;
+        color: #222;
+      }
+
+      /* Efecto al hacer clic dentro del input */
+      input:focus {
+        background: #fff3a3;
+        transform: scale(1.03);
+      }
+
+      /* Oculta flechas del input numérico en navegadores webkit */
+      input::-webkit-inner-spin-button,
+      input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+      }
+
+      /* Oculta flechas del input numérico en Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+
+      /* Estilo general de los botones */
       button {
-        width: 85%;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: 3px solid #222;
+        border-radius: 15px;
+        cursor: pointer;
+        background: #ffd60a;
+        color: #222;
+        transition:
+          transform 0.2s,
+          background 0.2s;
       }
-    }
-    .footer {
-  position: fixed;          /* Fijo en pantalla */
-  bottom: 10px;             /* Desde abajo */
-  right: 15px;               /* Desde la derecha */
-  font-size: 14px;
-  color: #222;
-  background: rgba(255,255,255,0.8);
-  padding: 6px 12px;
-  border-radius: 10px;
-  border: 2px solid #222;
-  box-shadow: 3px 3px 0 #222;
-  font-weight: bold;
-}
-  </style>
-</head>
-<body>
 
-  <!-- Tarjeta principal del juego -->
-  <div class="game-card" id="gameCard">
+      /* Efecto al pasar el mouse */
+      button:hover {
+        transform: translateY(-2px);
+        background: #ffcc00;
+      }
 
-    <!-- Título visible -->
-    <h1> Adivina el Número </h1>
+      /* Efecto al hacer clic */
+      button:active {
+        transform: translateY(1px);
+      }
 
-    <!-- Texto guía del juego -->
-    <p class="subtitle">El personaje escondió un número del 1 al 100... ¿puedes encontrarlo?</p>
+      /* Botón desactivado */
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
 
-    <!-- Zona de controles: input y botón para adivinar -->
-    <div class="controls">
-      <!-- Input para escribir el número -->
-      <input type="number" id="inputIntento" min="1" max="100" placeholder="Tu número">
+      /* Zona donde aparece el mensaje principal */
+      #mensaje {
+        min-height: 40px;
+        font-size: 22px;
+        font-weight: bold;
+        margin: 20px 0 10px;
+      }
 
-      <!-- Botón para enviar el intento -->
-      <button id="btnAdivinar">Adivinar</button>
+      /* Contador de intentos */
+      #contador {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      /* Contenedor del historial de intentos */
+      .historial {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        min-height: 35px;
+        margin-top: 10px;
+      }
+
+      /* Pastillas visuales para cada intento */
+      .guess-pill {
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: bold;
+        border: 2px solid #222;
+      }
+
+      /* Botón de reinicio con otro color para diferenciarlo */
+      #btnReiniciar {
+        margin-top: 18px;
+        background: #90e0ef;
+        display: none;
+      }
+
+      /* Adaptación para pantallas pequeñas */
+      @media (max-width: 480px) {
+        .game-card {
+          padding: 28px 18px;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        input,
+        button {
+          width: 85%;
+        }
+      }
+      .footer {
+        position: fixed; /* Fijo en pantalla */
+        bottom: 10px; /* Desde abajo */
+        right: 15px; /* Desde la derecha */
+        font-size: 14px;
+        color: #222;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 6px 12px;
+        border-radius: 10px;
+        border: 2px solid #222;
+        box-shadow: 3px 3px 0 #222;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tarjeta principal del juego -->
+    <div class="game-card" id="gameCard">
+      <!-- Título visible -->
+      <h1>Adivina el Número</h1>
+
+      <!-- Texto guía del juego -->
+      <p class="subtitle">
+        El personaje escondió un número del 1 al 100... ¿puedes adivinarlo?
+      </p>
+
+      <!-- Zona de controles: input y botón para adivinar -->
+      <div class="controls">
+        <!-- Input para escribir el número -->
+        <input
+          type="number"
+          id="inputIntento"
+          min="1"
+          max="100"
+          placeholder="Tu número"
+        />
+
+        <!-- Botón para enviar el intento -->
+        <button id="btnAdivinar">Adivinar</button>
+      </div>
+
+      <!-- Aquí se muestran las pistas y mensajes -->
+      <p id="mensaje">👋 ¡Bienvenido al juego!</p>
+
+      <!-- Aquí se actualiza cuántos intentos lleva el jugador -->
+      <p id="contador">Intentos: 0</p>
+
+      <!-- Aquí se mostrarán los intentos anteriores en forma de pastillas -->
+      <div id="historial" class="historial"></div>
+
+      <!-- Botón para volver a comenzar el juego -->
+      <button id="btnReiniciar">🔄 Jugar otra vez</button>
     </div>
 
-    <!-- Aquí se muestran las pistas y mensajes -->
-    <p id="mensaje">👋 ¡Bienvenido al juego!</p>
-
-    <!-- Aquí se actualiza cuántos intentos lleva el jugador -->
-    <p id="contador">Intentos: 0</p>
-
-    <!-- Aquí se mostrarán los intentos anteriores en forma de pastillas -->
-    <div id="historial" class="historial"></div>
-
-    <!-- Botón para volver a comenzar el juego -->
-    <button id="btnReiniciar">🔄 Jugar otra vez</button>
-  </div>
-
-  <!-- Vincula este HTML con el archivo JavaScript -->
-  <script src="script.js"></script>
-  <footer class="footer">
-  Hecho por Kevin León 💻
-</footer>
-</body>
+    <!-- Vincula este HTML con el archivo JavaScript -->
+    <script src="script.js"></script>
+    <footer class="footer">Hecho por Kevin León 💻</footer>
+  </body>
 </html>
