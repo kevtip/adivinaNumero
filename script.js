@@ -226,9 +226,8 @@ inputIntento.addEventListener('keypress', function (evento) {
 // Cuando se haga clic en el botón reiniciar
 btnReiniciar.addEventListener('click', reiniciarJuego);
 
-
-// ------------------------------------------------------
 // 9. MENSAJE INICIAL
-// Muestra un mensaje apenas carga el juego.
-// ------------------------------------------------------
 mostrarMensaje('¡Bienvenido al mundo Adivina el número!', '#ff4d6d');
+
+
+

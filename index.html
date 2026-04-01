@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Título que aparecerá en la pestaña del navegador -->
-  <title>Adivina el Número</title>
+  <title>Adivina el Número - Kevin Leon</title>
 
   <style>
     /* 
@@ -26,6 +26,7 @@
       - Centrado horizontal y vertical
       - Fondo colorido estilo cartoon
     */
+
     body {
       font-family: 'Trebuchet MS', 'Comic Sans MS', Arial, sans-serif;
       min-height: 100vh;
@@ -195,6 +196,19 @@
         width: 85%;
       }
     }
+    .footer {
+  position: fixed;          /* Fijo en pantalla */
+  bottom: 10px;             /* Desde abajo */
+  right: 15px;               /* Desde la derecha */
+  font-size: 14px;
+  color: #222;
+  background: rgba(255,255,255,0.8);
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 2px solid #222;
+  box-shadow: 3px 3px 0 #222;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
@@ -232,5 +246,8 @@
 
   <!-- Vincula este HTML con el archivo JavaScript -->
   <script src="script.js"></script>
+  <footer class="footer">
+  Hecho por Kevin León 💻
+</footer>
 </body>
 </html>
