@@ -35,8 +35,6 @@ let historialIntentos = [];
 // Muestra en consola el número secreto solo para pruebas
 console.log('Número secreto actual:', numeroSecreto);
 
-
-// ------------------------------------------------------
 // 3. FUNCIÓN PARA MOSTRAR MENSAJES
 function mostrarMensaje(texto, color) {
   // Cambia el texto del elemento mensaje
